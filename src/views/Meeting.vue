@@ -291,7 +291,16 @@ export default {
       
       that.addLog('info', `方法：setLocalVideoCapturer: 采集本地媒体流`);
       Meet.setLocalVideoCapturer({
+        video: {
+          enable: true,
+          deviceId: that.cameraDeviceId
+        },
+        audio: {
+          enable: true,
+          deviceId: that.micphoneDeviceId
+        }
       }).then(e => {
+        e.mediaRender.id = "myVideo";
         this.$refs.myVideoView.appendChild(e.mediaRender);
         Meet.joinRTC(that.roomId);
       });
@@ -319,20 +328,17 @@ export default {
       that.addLog('info', `切换摄像头`);
       that.Meet.switchDevice({
         video: {
-          enabled: that.videoEnable,
+          enable: that.videoEnable,
           deviceId: that.cameraDeviceId
         },
         audio: {
-          enabled: that.audioEnable,
+          enable: that.audioEnable,
           deviceId: that.micphoneDeviceId
         }
       }).then(e => {
         document.getElementById("myVideo").remove();
-        let myVideo = document.createElement('div');
-        myVideo.id = "myVideo";
-        e.video && myVideo.appendChild(e.video);
-        e.audio && myVideo.appendChild(e.audio);
-        that.$refs.myVideoView.appendChild(myVideo);
+        e.mediaRender.id = "myVideo";
+        that.$refs.myVideoView.appendChild(e.mediaRender);
       }).catch(err => {
 
       });
@@ -343,20 +349,17 @@ export default {
       that.addLog('info', `切换麦克风`);
       that.Meet.switchDevice({
         video: {
-          enabled: that.videoEnable,
+          enable: that.videoEnable,
           deviceId: that.cameraDeviceId
         },
         audio: {
-          enabled: that.audioEnable,
+          enable: that.audioEnable,
           deviceId: that.micphoneDeviceId
         }
       }).then(e => {
         document.getElementById("myVideo").remove();
-        let myVideo = document.createElement('div');
-        myVideo.id = "myVideo";
-        e.video && myVideo.appendChild(e.video);
-        e.audio && myVideo.appendChild(e.audio);
-        that.$refs.myVideoView.appendChild(myVideo);
+        e.mediaRender.id = "myVideo";
+        that.$refs.myVideoView.appendChild(e.mediaRender);
       }).catch(err => {
 
       });
