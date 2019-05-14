@@ -60,7 +60,7 @@ anyRTC-Meeting-Web SDK，支持视频、语音多人会议，适用于会议、�
 [anyRTC-Meeting-Android](https://github.com/AnyRTC/anyRTC-meeting-Android)
 
 ## iOS版anyRTC-Meeting
-[anyRTC-Meeting-Web](https://github.com/AnyRTC/anyRTC-meeting-iOS)
+[anyRTC-Meeting-iOS](https://github.com/AnyRTC/anyRTC-meeting-iOS)
 
 ## 技术支持
 anyRTC官方网址：https://www.anyrtc.io </br>
