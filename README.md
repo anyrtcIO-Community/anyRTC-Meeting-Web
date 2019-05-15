@@ -51,7 +51,7 @@ anyRTC-Meeting-Web SDK，支持视频、语音多人会议，适用于会议、�
 - H5支持chrome内核
 
 ## 扫描二维码下载iOS demo
-![Meet](https://github.com/anyRTC/anyRTC-Meeting-iOS/blob/master/image/RTCMeeting.png)
+![Meet](https://github.com/anyRTC/anyRTC-Meeting-iOS/raw/master/image/xoTQ.png)
 
 ## 扫描二维码下载Android demo
 ![Meet](https://camo.githubusercontent.com/11cd7d397d6d5883642a2bf558471b364fe6bd39/68747470733a2f2f7777772e70677965722e636f6d2f6170702f7172636f64652f65553055)
