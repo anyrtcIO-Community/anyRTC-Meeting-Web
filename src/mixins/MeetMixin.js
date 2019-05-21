@@ -23,7 +23,9 @@ export default {
   methods: {
     handleResize(e) {
       let that = this;
-      if (that.videoList.length === 0) return;
+      let videos = document.querySelectorAll('.ar-video_box');
+      if (videos.length === 0) return;
+      let videoArray = Array.prototype.slice.call(videos);
       let videoRect = that.$refs.videoView.getBoundingClientRect();
       let optimumWidth = 0;
       let optimumHeight = 0;
@@ -42,14 +44,16 @@ export default {
       that.$refs.videoWrap.style.width = optimumWidth + 'px';
       that.$refs.videoWrap.style.height = optimumHeight + 'px';
 
-      if (that.videoList.length > 1) {
-        that.videoList.map(video => {
-          video.width = '50%';
-          video.height = '50%';
+      
+      if (videoArray.length > 1) {
+        videoArray.map(item => {
+          item.style.width = "50%";
+          item.style.height = "50%";
         });
-      } else {
-        that.videoList[0].width = optimumWidth + 'px';
-        that.videoList[0].height = optimumHeight + 'px';
+      }
+      else {
+        videos[0].style.width = optimumWidth + 'px';
+        videos[0].style.height = optimumHeight + 'px';
       }
     }
   },

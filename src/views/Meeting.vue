@@ -67,9 +67,9 @@
         <div class="ar-main">
           <div class="ar-video_view" ref="videoView">
             <div class="ar-video_wrap" ref="videoWrap">
-              <div class="ar-video_box" v-for="(video, n) in videoList" :key="n" :id="video.id" :style="{'width': video.width, 'height': video.height}">
+              <!-- <div class="ar-video_box" v-for="(video, n) in videoList" :key="n" :id="video.id" :style="{'width': video.width, 'height': video.height}"> -->
                 <!-- <div>{{video.id}}</div> -->
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -147,16 +147,12 @@ export default {
     //远程视频流打开
     Meet.on("stream-subscribed", (peerId, pubId, userData, mediaRender) => {
       that.addLog('info', `回调：stream-subscribed: 远程人员加入 ${pubId}`);
-      
-      that.videoList.push({
-        id: "video-player_" + pubId,
-        width: "100%",
-        height: "100%",
-        isFull: false,
-      });
+
+      mediaRender.className = "ar-video_box";
+      mediaRender.id = "video-player_" + pubId;
+      that.$refs.videoWrap.appendChild(mediaRender);
       
       that.$nextTick(() => {
-        document.getElementById("video-player_"+pubId).appendChild(mediaRender);
         that.handleResize();
       });
     });
@@ -164,11 +160,8 @@ export default {
     //远程视频流断开
     Meet.on("stream-unsubscribed", (peerId, pubId, userData) => {
       that.addLog('info', `回调：stream-unsubscribed: 远程人员离开 ${pubId}`);
-      that.videoList.map((video, index) => {
-        if (video.id == "video-player_" + pubId) {
-          that.videoList.splice(index, 1);
-        }
-      });
+      document.getElementById("video-player_" + pubId) && document.getElementById("video-player_" + pubId).remove();
+      
       that.$nextTick(() => {
         that.handleResize();
       });
@@ -177,31 +170,26 @@ export default {
     //远程屏幕共享流打开
     Meet.on("exstream-subscribed", (peerId, pubId, userData, mediaRender) => {
       that.addLog('info', `exstream-subscribed: 远程屏幕共享打开`);
-      console.log('屏幕共享打开', that.videoList)
-      that.videoList.push({
-        id: "video-player_" + pubId,
-        width: "100%",
-        height: "100%",
-        isFull: false,
-      });
+
+      mediaRender.className = "ar-video_box";
+      mediaRender.id = "video-player_" + pubId;
+      that.$refs.videoWrap.appendChild(mediaRender);
+
       that.$nextTick(() => {
-        document.getElementById("video-player_"+pubId).appendChild(mediaRender);
         that.handleResize();
-      })
+      });
     });
+
     //远程屏幕共享流关闭
     Meet.on("exstream-unsubscribed", (peerId, pubId, userData) => {
       that.addLog('info', `回调：exstream-unsubscribed: 远程屏幕共享关闭 ${pubId}`);
       document.getElementById("video-player_" + pubId) && document.getElementById("video-player_" + pubId).remove();
-      that.videoList.map((video, index) => {
-        if (video.id === "video-player_" + pubId) {
-          that.videoList.splice(index, 1);
-        }
-      });
+
       that.$nextTick(() => {
         that.handleResize();
       });
     });
+
     //打开共享通道结果
     Meet.on("share-result", (ok) => {
       that.addLog('info', `回调：share-result: 共享屏幕结果 ${ok}`);
@@ -254,6 +242,7 @@ export default {
         that.addLog('error', `共享失败，请检查共享通道是否被占用`);
       }
     });
+
     //共享被打开
     Meet.on("share-opened", (shareType, shareInfo, sharerUserId, sharerUserData) => {
       that.addLog('info', `远程打开共享通道`);
@@ -570,6 +559,8 @@ export default {
     .ar-video_wrap {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
       width: 100%; 
       height: 100%;
       overflow: hidden;
