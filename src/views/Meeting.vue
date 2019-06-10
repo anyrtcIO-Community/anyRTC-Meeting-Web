@@ -51,11 +51,6 @@
           </div>
 
           <div class="ar-meet_control_right">
-            <!-- <input type="text" v-model="broadCastId">
-            <button type="primary" @click="setBroadCast">setBroadCast</button>
-            <button type="primary" @click="endBroadCast">endBroadCast</button>
-            <button type="primary" @click="setTalkOnly">setTalkOnly</button>
-            <button type="primary" @click="endTalkOnly">endTalkOnly</button> -->
             <button :class="videoEnable ? 'on': 'off'" style="margin-left: 5px;" hollow @click="switchVideo">视频 ： {{ videoEnable ? '开' : '关' }}</button>
             <button :class="audioEnable ? 'on': 'off'" style="margin-left: 5px;" hollow @click="switchAudio">音频 ： {{ audioEnable ? '开' : '关' }}</button>
             <button class="signOut" style="margin-left: 5px;" @click="leaveMeet">退出</button>
@@ -83,6 +78,7 @@ import MeetMixin from '@/mixins/MeetMixin';
 import ArMeet from 'ar-meet';
 import getScreenStream from 'ar-share-screen';
 import config from '@/config';
+// import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -145,8 +141,8 @@ export default {
     });
     
     //远程视频流打开
-    Meet.on("stream-subscribed", (peerId, pubId, userData, mediaRender) => {
-      that.addLog('info', `回调：stream-subscribed: 远程人员加入 ${pubId}`);
+    Meet.on("stream-subscribed", (peerId, pubId, userId, userData, mediaRender) => {
+      that.addLog('info', `回调：stream-subscribed: 远程人员加入 ${peerId} ${pubId}`);
 
       mediaRender.className = "ar-video_box";
       mediaRender.id = "video-player_" + pubId;
@@ -158,7 +154,7 @@ export default {
     });
 
     //远程视频流断开
-    Meet.on("stream-unsubscribed", (peerId, pubId, userData) => {
+    Meet.on("stream-unsubscribed", (peerId, pubId, userId, userData) => {
       that.addLog('info', `回调：stream-unsubscribed: 远程人员离开 ${pubId}`);
       document.getElementById("video-player_" + pubId) && document.getElementById("video-player_" + pubId).remove();
       
@@ -168,7 +164,7 @@ export default {
     });
 
     //远程屏幕共享流打开
-    Meet.on("exstream-subscribed", (peerId, pubId, userData, mediaRender) => {
+    Meet.on("exstream-subscribed", (peerId, pubId, userId, userData, mediaRender) => {
       that.addLog('info', `exstream-subscribed: 远程屏幕共享打开`);
 
       mediaRender.className = "ar-video_box";
