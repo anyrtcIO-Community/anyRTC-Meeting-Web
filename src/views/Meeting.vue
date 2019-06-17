@@ -78,7 +78,6 @@ import MeetMixin from '@/mixins/MeetMixin';
 import ArMeet from 'ar-meet';
 import getScreenStream from 'ar-share-screen';
 import config from '@/config';
-// import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -113,6 +112,7 @@ export default {
       audioMeet: false,
       autoBitrate: true,//默认true，true为根据网络状况自适应码流，false为强制指定码率
       // videoProfile: 'ARVideoProfile1080P',
+      videoProfile: 'ARVideoProfile720P',
     });
 
     Meet.configServer(config.RTC_SERVER_URL);
