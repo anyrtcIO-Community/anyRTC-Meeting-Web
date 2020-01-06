@@ -112,7 +112,7 @@ export default {
       audioMeet: false,
       autoBitrate: true,//默认true，true为根据网络状况自适应码流，false为强制指定码率
       // videoProfile: 'ARVideoProfile1080P',
-      videoProfile: 'ARVideoProfile720P',
+      videoProfile: 'ARVideoProfile360P',
     });
 
     Meet.configServer(config.RTC_SERVER_URL);
@@ -198,7 +198,7 @@ export default {
             '1. 请检查是否安装"anyRTC-ScreenShare"屏幕共享插件,如果没有请点击https://chrome.google.com/webstore/detail/anyrtc-screenshare/daiabbkkhgegdmhfpocaakcgbajnkgbp?hl=zh-CN下载\n' +
             '2. 安装了屏幕共享插件，但是没有启用该插件。\n' + 
             '说明：\n火狐浏览器或谷歌版本72以上无需安装插件。\n' +
-            '360、QQ平台也有对应的插件下次。');
+            '360、QQ平台也有对应的插件下载。');
           }
           else if (e === 'no-support') {
             that.Meet.closeShare(0);
@@ -288,6 +288,9 @@ export default {
         e.mediaRender.id = "myVideo";
         this.$refs.myVideoView.appendChild(e.mediaRender);
         Meet.joinRTC(that.roomId);
+      }).catch(err => {
+        console.log('打开摄像头失败：', err);
+        throw err;
       });
     });
   },

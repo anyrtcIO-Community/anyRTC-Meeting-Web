@@ -13,6 +13,10 @@
         <div class="meet-footer_item">v3.0.0</div>
         <div class="meet-footer_item">技术支持：<a href="">zhangjianqiang@dync.cc</a></div>
         <div class="meet-footer_item">anyRTC官网：<a href="https://www.anyrtc.io" target="_blank">www.anyrtc.io</a></div>
+        <div class="meet-footer_item">
+          <span><a data-v-3e91617f="" href="http://www.miitbeian.gov.cn" target="_blank">沪ICP备12034204号</a></span>
+          <span style="margin-left: 18px;"><a data-v-3e91617f="" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011002002733"><img src="https://console.anyrtc.io/static/img/gongan_logo.d0289dc0.png" style="padding: 0px 5px 0px 20px; vertical-align: bottom; width: 18px;">沪公网安备 31011002002733号</a></span>
+        </div>
       </div>
     </div>
   </div>
