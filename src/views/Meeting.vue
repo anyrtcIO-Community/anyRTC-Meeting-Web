@@ -115,7 +115,7 @@ export default {
       videoProfile: 'ARVideoProfile360P',
     });
 
-    Meet.configServer(config.RTC_SERVER_URL);
+    config.RTC_SERVER_URL && Meet.configServer(config.RTC_SERVER_URL);
 
     that.addLog('info', '方法：initEngine：初始化');
     Meet.initAppInfo(config.APP_ID, config.APP_TOKEN);
